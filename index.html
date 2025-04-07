@@ -3,29 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VetHome - Gestão para Veterinários</title>
+    <title>Controle Financeiro - Veterinária Fisiatra</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root {
-            --primary: #388e3c;
-            --primary-dark: #2e7d32;
-            --secondary: #8bc34a;
-            --background: #f5f5f5;
-            --card: #ffffff;
-            --text: #333333;
-            --error: #f44336;
-            --success: #4caf50;
+            --primary: #4e73df;
+            --secondary: #1cc88a;
+            --danger: #e74a3b;
+            --warning: #f6c23e;
+            --info: #36b9cc;
+            --light: #f8f9fc;
+            --dark: #5a5c69;
+            --gray: #858796;
+            --white: #fff;
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            background-color: var(--background);
-            color: var(--text);
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fc;
+            color: #333;
+            line-height: 1.6;
         }
         
         .container {
@@ -35,795 +39,1467 @@
         }
         
         header {
-            background-color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), #224abe);
             color: white;
-            padding: 15px 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 20px 0;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
         }
         
-        .logo {
+        .header-content {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 10px;
         }
         
-        .logo h1 {
+        h1 {
             font-size: 24px;
+            font-weight: 600;
         }
         
-        nav {
-            background-color: var(--primary-dark);
-            padding: 10px 20px;
-        }
-        
-        .tabs {
-            display: flex;
-            list-style: none;
-        }
-        
-        .tabs li {
-            cursor: pointer;
-            padding: 10px 15px;
-            color: white;
-            border-radius: 5px 5px 0 0;
-            margin-right: 5px;
-        }
-        
-        .tabs li.active {
-            background-color: var(--card);
-            color: var(--text);
-        }
-        
-        .tab-content {
-            display: none;
-            background-color: var(--card);
-            padding: 20px;
-            border-radius: 0 0 5px 5px;
+        h2 {
+            font-size: 20px;
+            font-weight: 500;
             margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        
-        .tab-content.active {
-            display: block;
+            color: var(--dark);
         }
         
         .card {
-            background-color: var(--card);
-            padding: 20px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 25px;
+            margin-bottom: 30px;
         }
         
         .form-group {
             margin-bottom: 15px;
         }
         
-        .form-row {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .form-row .form-group {
-            flex: 1;
-        }
-        
         label {
             display: block;
             margin-bottom: 5px;
             font-weight: 500;
+            color: var(--dark);
         }
         
-        input, select, textarea {
+        input, select {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 16px;
+            padding: 10px 15px;
+            border: 1px solid #d1d3e2;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: all 0.3s;
         }
         
-        button {
+        input:focus, select:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+        }
+        
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -10px;
+        }
+        
+        .form-col {
+            flex: 1;
+            padding: 0 10px;
+            min-width: 200px;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+        }
+        
+        .checkbox-group input {
+            width: auto;
+            margin-right: 10px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 500;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+        
+        .btn-primary {
             background-color: var(--primary);
             color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
         }
         
-        button:hover {
-            background-color: var(--primary-dark);
+        .btn-primary:hover {
+            background-color: #2e59d9;
+        }
+        
+        .btn-success {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background-color: #17a673;
+        }
+        
+        .btn-danger {
+            background-color: var(--danger);
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background-color: #d52a1e;
+        }
+        
+        .btn-warning {
+            background-color: var(--warning);
+            color: white;
+        }
+        
+        .btn-warning:hover {
+            background-color: #e0b12c;
+        }
+        
+        .btn-info {
+            background-color: var(--info);
+            color: white;
+        }
+        
+        .btn-info:hover {
+            background-color: #2a96a5;
+        }
+        
+        .btn-sm {
+            padding: 5px 10px;
+            font-size: 13px;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 10px;
         }
         
         table {
             width: 100%;
             border-collapse: collapse;
+            margin: 20px 0;
         }
         
         th, td {
             padding: 12px 15px;
             text-align: left;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid #e3e6f0;
         }
         
         th {
-            background-color: #f9f9f9;
+            background-color: #f8f9fc;
+            font-weight: 600;
+            color: var(--dark);
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 0.5px;
         }
         
-        .status {
+        tr:hover {
+            background-color: #f6f9ff;
+        }
+        
+        .pago {
+            background-color: rgba(28, 200, 138, 0.1);
+        }
+        
+        .nao-pago {
+            background-color: rgba(231, 74, 59, 0.1);
+        }
+        
+        .badge {
             display: inline-block;
             padding: 5px 10px;
-            border-radius: 20px;
+            border-radius: 50px;
             font-size: 12px;
-            font-weight: bold;
+            font-weight: 600;
         }
         
-        .paid {
-            background-color: #e8f5e9;
-            color: var(--success);
+        .badge-success {
+            background-color: rgba(28, 200, 138, 0.2);
+            color: var(--secondary);
         }
         
-        .unpaid {
-            background-color: #ffebee;
-            color: var(--error);
+        .badge-danger {
+            background-color: rgba(231, 74, 59, 0.2);
+            color: var(--danger);
         }
         
-        .metrics {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+        .badge-warning {
+            background-color: rgba(246, 194, 62, 0.2);
+            color: #b58d28;
+        }
+        
+        .stats-card {
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            border-radius: 8px;
+            color: white;
             margin-bottom: 20px;
         }
         
-        .metric-card {
-            background-color: var(--card);
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            text-align: center;
+        .stats-card-primary {
+            background: linear-gradient(135deg, var(--primary), #224abe);
         }
         
-        .metric-value {
-            font-size: 28px;
-            font-weight: bold;
-            margin: 10px 0;
-            color: var(--primary);
+        .stats-card-success {
+            background: linear-gradient(135deg, var(--secondary), #17a673);
         }
         
-        .metric-title {
+        .stats-card-warning {
+            background: linear-gradient(135deg, var(--warning), #e0b12c);
+        }
+        
+        .stats-card-danger {
+            background: linear-gradient(135deg, var(--danger), #d52a1e);
+        }
+        
+        .stats-card-info {
+            background: linear-gradient(135deg, var(--info), #2a96a5);
+        }
+        
+        .stats-card-title {
             font-size: 14px;
-            color: #666;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 10px;
+            opacity: 0.8;
         }
         
-        .chart-container {
-            margin-top: 20px;
-            height: 300px;
-            position: relative;
-            background-color: #f9f9f9;
-            border-radius: 5px;
-            padding: 20px;
+        .stats-card-value {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .stats-card-change {
+            font-size: 12px;
             display: flex;
-            justify-content: center;
             align-items: center;
         }
         
-        .chart-placeholder {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #e8f5e9;
-            border-radius: 5px;
-            color: var(--primary);
-            font-weight: bold;
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
         }
         
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: var(--success);
-            color: white;
-            padding: 15px 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            opacity: 0;
-            transform: translateY(-20px);
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #e3e6f0;
+            margin-bottom: 20px;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
             transition: all 0.3s;
         }
         
-        .notification.show {
-            opacity: 1;
-            transform: translateY(0);
+        .tab.active {
+            border-bottom: 3px solid var(--primary);
+            color: var(--primary);
+            font-weight: 500;
+        }
+        
+        .tab:hover:not(.active) {
+            border-bottom: 3px solid #d1d3e2;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .modal-title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--gray);
+        }
+        
+        .report-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .report-option {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid #e3e6f0;
+        }
+        
+        .report-option:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+        
+        .report-option i {
+            font-size: 30px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .report-option h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .report-option p {
+            font-size: 14px;
+            color: var(--gray);
         }
         
         @media (max-width: 768px) {
-            .tabs {
+            .form-col {
+                flex: 100%;
+                margin-bottom: 15px;
+            }
+            
+            .stats-row {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .btn-group {
                 flex-direction: column;
             }
-            
-            .tabs li {
-                margin-bottom: 5px;
-                border-radius: 5px;
-            }
-            
-            .metrics {
+        }
+        
+        @media (max-width: 480px) {
+            .stats-row {
                 grid-template-columns: 1fr;
-            }
-            
-            .form-row {
-                flex-direction: column;
-                gap: 0;
             }
         }
     </style>
 </head>
-
 <body>
     <header>
-        <div class="logo">
-            <h1>VetHome</h1>
-            <span>Gestão para Veterinários Autônomos</span>
+        <div class="container header-content">
+            <h1><i class="fas fa-paw"></i> Controle Financeiro - Veterinária Fisiatra</h1>
+            <div class="btn-group">
+                <button class="btn btn-success" onclick="openModal('report-modal')"><i class="fas fa-chart-bar"></i> Relatórios</button>
+                <button class="btn btn-info" onclick="exportarParaCSV()"><i class="fas fa-file-export"></i> Exportar</button>
+            </div>
         </div>
     </header>
     
-    <nav>
-        <ul class="tabs">
-            <li class="active" data-tab="atendimentos">Atendimentos</li>
-            <li data-tab="pacientes">Pacientes</li>
-            <li data-tab="financeiro">Financeiro</li>
-            <li data-tab="relatorios">Relatórios</li>
-        </ul>
-    </nav>
-    
     <div class="container">
-        <!-- Aba de Atendimentos -->
-        <div id="atendimentos" class="tab-content active">
-            <h2>Novo Atendimento</h2>
-            <div class="card">
-                <form id="atendimento-form">
+        <div class="stats-row">
+            <div class="stats-card stats-card-primary">
+                <div class="stats-card-title">Atendimentos Hoje</div>
+                <div class="stats-card-value" id="stats-hoje">0</div>
+                <div class="stats-card-change"><i class="fas fa-calendar-day"></i> Dia atual</div>
+            </div>
+            <div class="stats-card stats-card-success">
+                <div class="stats-card-title">Faturamento Hoje</div>
+                <div class="stats-card-value" id="stats-faturamento-hoje">R$ 0,00</div>
+                <div class="stats-card-change"><i class="fas fa-money-bill-wave"></i> Receita do dia</div>
+            </div>
+            <div class="stats-card stats-card-warning">
+                <div class="stats-card-title">Pendentes de Pagamento</div>
+                <div class="stats-card-value" id="stats-pendentes">0</div>
+                <div class="stats-card-change"><i class="fas fa-exclamation-circle"></i> A receber</div>
+            </div>
+            <div class="stats-card stats-card-danger">
+                <div class="stats-card-title">NFs Pendentes</div>
+                <div class="stats-card-value" id="stats-nf-pendentes">0</div>
+                <div class="stats-card-change"><i class="fas fa-file-invoice"></i> Não emitidas</div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2><i class="fas fa-plus-circle"></i> Novo Atendimento</h2>
+            <div class="form-row">
+                <div class="form-col">
                     <div class="form-group">
-                        <label for="paciente">Paciente:</label>
-                        <select id="paciente" required>
-                            <option value="">Selecione um paciente</option>
-                            <option value="1">Thor - Labrador (Maria Silva)</option>
-                            <option value="2">Luna - Siamês (João Oliveira)</option>
-                            <option value="3">Bob - Golden Retriever (Carlos Santos)</option>
-                        </select>
+                        <label for="data">Data</label>
+                        <input type="date" id="data" required>
                     </div>
-                    
+                </div>
+                <div class="form-col">
                     <div class="form-group">
-                        <label for="data">Data:</label>
-                        <input type="date" id="data" required value="2025-03-31">
+                        <label for="paciente">Paciente</label>
+                        <input type="text" id="paciente" placeholder="Nome do Paciente" required list="pacientes-list">
+                        <datalist id="pacientes-list"></datalist>
                     </div>
-                    
+                </div>
+                <div class="form-col">
                     <div class="form-group">
-                        <label for="endereco">Endereço:</label>
+                        <label for="tutor">Tutor</label>
+                        <input type="text" id="tutor" placeholder="Nome do Tutor" required>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-col">
+                    <div class="form-group">
+                        <label for="cpf">CPF do Tutor</label>
+                        <input type="text" id="cpf" placeholder="000.000.000-00">
+                    </div>
+                </div>
+                <div class="form-col">
+                    <div class="form-group">
+                        <label for="endereco">Endereço</label>
                         <input type="text" id="endereco" placeholder="Endereço completo">
                     </div>
-                    
+                </div>
+                <div class="form-col">
                     <div class="form-group">
-                        <label for="observacoes">Observações Clínicas:</label>
-                        <textarea id="observacoes" rows="3" placeholder="Observações do atendimento"></textarea>
+                        <label for="valor">Valor</label>
+                        <input type="number" id="valor" placeholder="Valor" step="0.01" required>
                     </div>
-                    
-                    <div class="form-group">
-                        <label for="valor">Valor (R$):</label>
-                        <input type="number" id="valor" placeholder="0.00" step="0.01" min="0">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="status">Status do Pagamento:</label>
-                        <select id="status">
-                            <option value="pago">Pago</option>
-                            <option value="pendente">Pendente</option>
-                        </select>
-                    </div>
-                    
-                    <button type="button" onclick="salvarAtendimento()">Salvar Atendimento</button>
-                </form>
+                </div>
             </div>
             
-            <h2>Atendimentos Recentes</h2>
-            <div class="card">
-                <table>
+            <div class="form-row">
+                <div class="form-col">
+                    <div class="form-group">
+                        <label for="pagamento">Forma de Pagamento</label>
+                        <select id="pagamento">
+                            <option value="Pix">Pix</option>
+                            <option value="Dinheiro">Dinheiro</option>
+                            <option value="Cartão">Cartão</option>
+                            <option value="Outro">Outro</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-col">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="pago">
+                        <label for="pago">Pago</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="nfEmitida">
+                        <label for="nfEmitida">NF Emitida</label>
+                    </div>
+                </div>
+                <div class="form-col">
+                    <div class="form-group">
+                        <label for="observacoes">Observações</label>
+                        <input type="text" id="observacoes" placeholder="Observações">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="adicionarAtendimento()"><i class="fas fa-save"></i> Salvar Atendimento</button>
+                <button class="btn btn-warning" onclick="limparFormulario()"><i class="fas fa-broom"></i> Limpar</button>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2><i class="fas fa-list"></i> Atendimentos Recentes</h2>
+            <div class="table-responsive">
+                <table id="tabelaAtendimentos">
                     <thead>
                         <tr>
                             <th>Data</th>
                             <th>Paciente</th>
                             <th>Tutor</th>
-                            <th>Procedimento</th>
                             <th>Valor</th>
-                            <th>Status</th>
+                            <th>Pagamento</th>
+                            <th>Pago</th>
+                            <th>NF</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>31/03/2025</td>
-                            <td>Thor</td>
-                            <td>Maria Silva</td>
-                            <td>Vacinação Anual</td>
-                            <td>R$ 180,00</td>
-                            <td><span class="status paid">Pago</span></td>
-                            <td><button>Detalhes</button></td>
-                        </tr>
-                        <tr>
-                            <td>30/03/2025</td>
-                            <td>Luna</td>
-                            <td>João Oliveira</td>
-                            <td>Consulta de Rotina</td>
-                            <td>R$ 150,00</td>
-                            <td><span class="status unpaid">Pendente</span></td>
-                            <td><button>Detalhes</button></td>
-                        </tr>
-                        <tr>
-                            <td>29/03/2025</td>
-                            <td>Bob</td>
-                            <td>Carlos Santos</td>
-                            <td>Tratamento Dermatológico</td>
-                            <td>R$ 220,00</td>
-                            <td><span class="status paid">Pago</span></td>
-                            <td><button>Detalhes</button></td>
-                        </tr>
+                    <tbody id="corpoTabela">
+                        <!-- Os atendimentos serão inseridos aqui -->
                     </tbody>
                 </table>
             </div>
         </div>
-        
-        <!-- Aba de Pacientes -->
-        <div id="pacientes" class="tab-content">
-            <h2>Cadastrar Novo Paciente</h2>
-            <div class="card">
-                <form id="paciente-form">
-                    <div class="form-group">
-                        <label for="nome_paciente">Nome do Paciente:</label>
-                        <input type="text" id="nome_paciente" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="especie">Espécie:</label>
-                        <select id="especie" required>
-                            <option value="canino">Canino</option>
-                            <option value="felino">Felino</option>
-                            <option value="ave">Ave</option>
-                            <option value="roedor">Roedor</option>
-                            <option value="outro">Outro</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="raca">Raça:</label>
-                        <input type="text" id="raca">
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="idade">Idade (anos):</label>
-                            <input type="number" id="idade" min="0" step="0.1">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="peso">Peso (kg):</label>
-                            <input type="number" id="peso" min="0" step="0.1">
-                        </div>
-                    </div>
-                    
-                    <h3 style="margin: 20px 0 10px 0;">Perimetria (cm)</h3>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="perimetro_torax">Tórax:</label>
-                            <input type="number" id="perimetro_torax" min="0" step="0.1">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="perimetro_abdomen">Abdômen:</label>
-                            <input type="number" id="perimetro_abdomen" min="0" step="0.1">
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="perimetro_membro_anterior_direito">Membro Anterior Direito:</label>
-                            <input type="number" id="perimetro_membro_anterior_direito" min="0" step="0.1">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="perimetro_membro_anterior_esquerdo">Membro Anterior Esquerdo:</label>
-                            <input type="number" id="perimetro_membro_anterior_esquerdo" min="0" step="0.1">
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="perimetro_membro_posterior_direito">Membro Posterior Direito:</label>
-                            <input type="number" id="perimetro_membro_posterior_direito" min="0" step="0.1">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="perimetro_membro_posterior_esquerdo">Membro Posterior Esquerdo:</label>
-                            <input type="number" id="perimetro_membro_posterior_esquerdo" min="0" step="0.1">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="nome_tutor">Nome do Tutor:</label>
-                        <input type="text" id="nome_tutor" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="telefone">Telefone:</label>
-                        <input type="tel" id="telefone" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="email">E-mail:</label>
-                        <input type="email" id="email">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="endereco_tutor">Endereço:</label>
-                        <input type="text" id="endereco_tutor" required>
-                    </div>
-                    
-                    <button type="button" onclick="salvarPaciente()">Cadastrar Paciente</button>
-                </form>
+    </div>
+    
+    <!-- Modal de Relatórios -->
+    <div class="modal" id="report-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title"><i class="fas fa-chart-pie"></i> Relatórios</h2>
+                <button class="close-modal" onclick="closeModal('report-modal')">&times;</button>
             </div>
             
-            <h2>Lista de Pacientes</h2>
-            <div class="card">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Paciente</th>
-                            <th>Espécie</th>
-                            <th>Raça</th>
-                            <th>Tutor</th>
-                            <th>Telefone</th>
-                            <th>Último Atendimento</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Thor</td>
-                            <td>Canino</td>
-                            <td>Labrador</td>
-                            <td>Maria Silva</td>
-                            <td>(11) 98765-4321</td>
-                            <td>31/03/2025</td>
-                            <td><button>Histórico</button></td>
-                        </tr>
-                        <tr>
-                            <td>Luna</td>
-                            <td>Felino</td>
-                            <td>Siamês</td>
-                            <td>João Oliveira</td>
-                            <td>(11) 91234-5678</td>
-                            <td>30/03/2025</td>
-                            <td><button>Histórico</button></td>
-                        </tr>
-                        <tr>
-                            <td>Bob</td>
-                            <td>Canino</td>
-                            <td>Golden Retriever</td>
-                            <td>Carlos Santos</td>
-                            <td>(11) 92222-3333</td>
-                            <td>29/03/2025</td>
-                            <td><button>Histórico</button></td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="tabs">
+                <div class="tab active" onclick="openTab(event, 'report-geral')">Geral</div>
+                <div class="tab" onclick="openTab(event, 'report-financeiro')">Financeiro</div>
+                <div class="tab" onclick="openTab(event, 'report-pacientes')">Por Paciente</div>
             </div>
-        </div>
-        
-        <!-- Aba de Financeiro -->
-        <div id="financeiro" class="tab-content">
-            <h2>Resumo Financeiro</h2>
-            <div class="metrics">
-                <div class="metric-card">
-                    <div class="metric-title">Faturamento do Dia</div>
-                    <div class="metric-value">R$ 180,00</div>
-                    <div>31/03/2025</div>
+            
+            <div id="report-geral" class="tab-content active">
+                <h3>Relatórios Gerais</h3>
+                <p>Selecione o tipo de relatório que deseja gerar:</p>
+                
+                <div class="report-options">
+                    <div class="report-option" onclick="gerarRelatorio('pendentes-pagamento')">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <h3>Pendentes de Pagamento</h3>
+                        <p>Lista todos os atendimentos que ainda não foram pagos</p>
+                    </div>
+                    <div class="report-option" onclick="gerarRelatorio('pendentes-nf')">
+                        <i class="fas fa-file-invoice"></i>
+                        <h3>Pendentes de NF</h3>
+                        <p>Atendimentos sem nota fiscal emitida</p>
+                    </div>
+                    <div class="report-option" onclick="gerarRelatorio('todos')">
+                        <i class="fas fa-list-ol"></i>
+                        <h3>Todos os Atendimentos</h3>
+                        <p>Lista completa de todos os atendimentos</p>
+                    </div>
                 </div>
                 
-                <div class="metric-card">
-                    <div class="metric-title">Faturamento da Semana</div>
-                    <div class="metric-value">R$ 1.250,00</div>
-                    <div>25/03 - 31/03/2025</div>
-                </div>
-                
-                <div class="metric-card">
-                    <div class="metric-title">Faturamento do Mês</div>
-                    <div class="metric-value">R$ 5.420,00</div>
-                    <div>Março/2025</div>
-                </div>
-                
-                <div class="metric-card">
-                    <div class="metric-title">Pagamentos Pendentes</div>
-                    <div class="metric-value">R$ 350,00</div>
-                    <div>2 clientes</div>
+                <div id="report-result-container">
+                    <!-- Resultados do relatório serão exibidos aqui -->
                 </div>
             </div>
             
-            <h2>Pagamentos Pendentes</h2>
-            <div class="card">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Data</th>
-                            <th>Paciente</th>
-                            <th>Tutor</th>
-                            <th>Procedimento</th>
-                            <th>Valor</th>
-                            <th>Dias Pendentes</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>30/03/2025</td>
-                            <td>Luna</td>
-                            <td>João Oliveira</td>
-                            <td>Consulta de Rotina</td>
-                            <td>R$ 150,00</td>
-                            <td>1</td>
-                            <td>
-                                <button>Marcar como Pago</button>
-                                <button>Lembrete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>27/03/2025</td>
-                            <td>Max</td>
-                            <td>Ana Pereira</td>
-                            <td>Exame de Sangue</td>
-                            <td>R$ 200,00</td>
-                            <td>4</td>
-                            <td>
-                                <button>Marcar como Pago</button>
-                                <button>Lembrete</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            
-            <h2>Histórico de Pagamentos</h2>
-            <div class="card">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Data</th>
-                            <th>Paciente</th>
-                            <th>Tutor</th>
-                            <th>Procedimento</th>
-                            <th>Valor</th>
-                            <th>Data do Pagamento</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>31/03/2025</td>
-                            <td>Thor</td>
-                            <td>Maria Silva</td>
-                            <td>Vacinação Anual</td>
-                            <td>R$ 180,00</td>
-                            <td>31/03/2025</td>
-                        </tr>
-                        <tr>
-                            <td>29/03/2025</td>
-                            <td>Bob</td>
-                            <td>Carlos Santos</td>
-                            <td>Tratamento Dermatológico</td>
-                            <td>R$ 220,00</td>
-                            <td>29/03/2025</td>
-                        </tr>
-                        <tr>
-                            <td>28/03/2025</td>
-                            <td>Bella</td>
-                            <td>Pedro Alves</td>
-                            <td>Consulta de Emergência</td>
-                            <td>R$ 250,00</td>
-                            <td>30/03/2025</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        
-        <!-- Aba de Relatórios -->
-        <div id="relatorios" class="tab-content">
-            <h2>Gerar Relatórios</h2>
-            <div class="card">
-                <form id="relatorio-form">
-                    <div class="form-group">
-                        <label for="tipo_relatorio">Tipo de Relatório:</label>
-                        <select id="tipo_relatorio" required>
-                            <option value="">Selecione o tipo</option>
-                            <option value="faturamento_diario">Faturamento Diário</option>
-                            <option value="faturamento_semanal">Faturamento Semanal</option>
-                            <option value="faturamento_mensal">Faturamento Mensal</option>
-                            <option value="paciente">Relatório por Paciente</option>
-                            <option value="tutor">Relatório por Tutor</option>
-                            <option value="procedimentos">Relatório de Procedimentos</option>
-                            <option value="pendentes">Pagamentos Pendentes</option>
-                        </select>
+            <div id="report-financeiro" class="tab-content">
+                <h3>Relatórios Financeiros</h3>
+                <p>Selecione o período para análise financeira:</p>
+                
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="report-period">Período</label>
+                            <select id="report-period" onchange="updateReportDates()">
+                                <option value="hoje">Hoje</option>
+                                <option value="semana">Esta Semana</option>
+                                <option value="mes">Este Mês</option>
+                                <option value="ano">Este Ano</option>
+                                <option value="custom">Personalizado</option>
+                            </select>
+                        </div>
                     </div>
-                    
-                    <div class="form-group">
-                        <label for="data_inicial">Data Inicial:</label>
-                        <input type="date" id="data_inicial">
+                    <div class="form-col" id="custom-date-start-col" style="display: none;">
+                        <div class="form-group">
+                            <label for="report-date-start">Data Inicial</label>
+                            <input type="date" id="report-date-start">
+                        </div>
                     </div>
-                    
-                    <div class="form-group">
-                        <label for="data_final">Data Final:</label>
-                        <input type="date" id="data_final">
+                    <div class="form-col" id="custom-date-end-col" style="display: none;">
+                        <div class="form-group">
+                            <label for="report-date-end">Data Final</label>
+                            <input type="date" id="report-date-end">
+                        </div>
                     </div>
-                    
-                    <div class="form-group">
-                        <label for="paciente_relatorio">Paciente (se aplicável):</label>
-                        <select id="paciente_relatorio">
-                            <option value="">Todos os Pacientes</option>
-                            <option value="1">Thor</option>
-                            <option value="2">Luna</option>
-                            <option value="3">Bob</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="tutor_relatorio">Tutor (se aplicável):</label>
-                        <select id="tutor_relatorio">
-                            <option value="">Todos os Tutores</option>
-                            <option value="1">Maria Silva</option>
-                            <option value="2">João Oliveira</option>
-                            <option value="3">Carlos Santos</option>
-                        </select>
-                    </div>
-                    
-                    <button type="button" onclick="gerarRelatorio()">Gerar Relatório</button>
-                </form>
-            </div>
-            
-            <h2>Relatório de Faturamento Mensal - Março/2025</h2>
-            <div class="card">
-                <div class="metrics">
-                    <div class="metric-card">
-                        <div class="metric-title">Total Faturado</div>
-                        <div class="metric-value">R$ 5.420,00</div>
-                    </div>
-                    
-                    <div class="metric-card">
-                        <div class="metric-title">Atendimentos</div>
-                        <div class="metric-value">32</div>
-                    </div>
-                    
-                    <div class="metric-card">
-                        <div class="metric-title">Ticket Médio</div>
-                        <div class="metric-value">R$ 169,38</div>
-                    </div>
-                    
-                    <div class="metric-card">
-                        <div class="metric-title">Pendentes</div>
-                        <div class="metric-value">R$ 350,00</div>
+                    <div class="form-col">
+                        <button class="btn btn-primary" onclick="gerarRelatorioFinanceiro()" style="margin-top: 25px;">
+                            <i class="fas fa-chart-line"></i> Gerar Relatório
+                        </button>
                     </div>
                 </div>
                 
-                <div class="chart-container">
-                    <div class="chart-placeholder">
-                        Gráfico de Faturamento Mensal
+                <div id="finance-report-result-container">
+                    <!-- Resultados do relatório financeiro serão exibidos aqui -->
+                </div>
+            </div>
+            
+            <div id="report-pacientes" class="tab-content">
+                <h3>Relatórios por Paciente</h3>
+                <p>Selecione um paciente para ver todos os atendimentos:</p>
+                
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="report-paciente">Paciente</label>
+                            <select id="report-paciente">
+                                <!-- Opções serão preenchidas por JavaScript -->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <button class="btn btn-primary" onclick="gerarRelatorioPaciente()" style="margin-top: 25px;">
+                            <i class="fas fa-search"></i> Buscar
+                        </button>
                     </div>
                 </div>
                 
-                <h3>Detalhamento por Semana</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Semana</th>
-                            <th>Período</th>
-                            <th>Atendimentos</th>
-                            <th>Faturamento</th>
-                            <th>Ticket Médio</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Semana 1</td>
-                            <td>01/03 a 07/03</td>
-                            <td>7</td>
-                            <td>R$ 1.180,00</td>
-                            <td>R$ 168,57</td>
-                        </tr>
-                        <tr>
-                            <td>Semana 2</td>
-                            <td>08/03 a 14/03</td>
-                            <td>9</td>
-                            <td>R$ 1.490,00</td>
-                            <td>R$ 165,56</td>
-                        </tr>
-                        <tr>
-                            <td>Semana 3</td>
-                            <td>15/03 a 21/03</td>
-                            <td>8</td>
-                            <td>R$ 1.500,00</td>
-                            <td>R$ 187,50</td>
-                        </tr>
-                        <tr>
-                            <td>Semana 4</td>
-                            <td>22/03 a 31/03</td>
-                            <td>8</td>
-                            <td>R$ 1.250,00</td>
-                            <td>R$ 156,25</td>
-                        </tr>
-                    </tbody>
-                </table>
-                
-                <div style="margin-top: 20px; text-align: right;">
-                    <button>Exportar PDF</button>
-                    <button>Exportar Excel</button>
+                <div id="paciente-report-result-container">
+                    <!-- Resultados do relatório por paciente serão exibidos aqui -->
                 </div>
             </div>
         </div>
     </div>
     
-    <div id="notification" class="notification">Atendimento salvo com sucesso!</div>
-    
     <script>
-        // Alternar entre as abas
-        document.querySelectorAll('.tabs li').forEach(tab => {
-            tab.addEventListener('click', () => {
-                // Remover classe ativa de todas as abas
-                document.querySelectorAll('.tabs li').forEach(t => t.classList.remove('active'));
-                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-                
-                // Adicionar classe ativa à aba clicada
-                tab.classList.add('active');
-                document.getElementById(tab.getAttribute('data-tab')).classList.add('active');
+        // Array para armazenar os atendimentos
+        let atendimentos = JSON.parse(localStorage.getItem('atendimentos')) || [];
+        let pacientes = [];
+        
+        // Inicializa a aplicação
+        window.onload = function() {
+            // Define a data atual como padrão
+            const hoje = new Date().toISOString().split('T')[0];
+            document.getElementById('data').value = hoje;
+            
+            // Atualiza a lista de pacientes para preenchimento automático
+            atualizarListaPacientes();
+            
+            // Atualiza a tabela e estatísticas
+            atualizarTabela();
+            atualizarEstatisticas();
+            
+            // Preenche a lista de pacientes para relatórios
+            preencherSelectPacientes();
+            
+            // Configura o autocomplete para paciente
+            document.getElementById('paciente').addEventListener('input', function() {
+                const paciente = this.value;
+                const atendimentoPaciente = atendimentos.find(a => a.paciente === paciente);
+                if (atendimentoPaciente) {
+                    document.getElementById('tutor').value = atendimentoPaciente.tutor;
+                    document.getElementById('cpf').value = atendimentoPaciente.cpf || '';
+                    document.getElementById('endereco').value = atendimentoPaciente.endereco || '';
+                }
             });
-        });
+        };
         
-        // Função para salvar atendimento
-        function salvarAtendimento() {
-            // Simulação de salvamento
-            const notification = document.getElementById('notification');
-            notification.classList.add('show');
+        // Função para adicionar um novo atendimento
+        function adicionarAtendimento() {
+            const data = document.getElementById('data').value;
+            const paciente = document.getElementById('paciente').value;
+            const tutor = document.getElementById('tutor').value;
+            const cpf = document.getElementById('cpf').value;
+            const endereco = document.getElementById('endereco').value;
+            const valor = parseFloat(document.getElementById('valor').value);
+            const pagamento = document.getElementById('pagamento').value;
+            const pago = document.getElementById('pago').checked;
+            const nfEmitida = document.getElementById('nfEmitida').checked;
+            const observacoes = document.getElementById('observacoes').value;
             
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
+            if (!data || !paciente || !tutor || isNaN(valor)) {
+                alert('Por favor, preencha todos os campos obrigatórios!');
+                return;
+            }
             
-            // Limpar formulário
-            document.getElementById('atendimento-form').reset();
+            const atendimento = {
+                id: Date.now(),
+                data,
+                paciente,
+                tutor,
+                cpf,
+                endereco,
+                valor,
+                pagamento,
+                pago,
+                nfEmitida,
+                observacoes,
+                servico: "Fisioterapia" // Todos os serviços são de fisioterapia
+            };
+            
+            atendimentos.push(atendimento);
+            localStorage.setItem('atendimentos', JSON.stringify(atendimentos));
+            atualizarTabela();
+            atualizarEstatisticas();
+            atualizarListaPacientes();
+            preencherSelectPacientes();
+            limparFormulario();
+            
+            // Mantém o foco no campo paciente para novo cadastro rápido
+            document.getElementById('paciente').focus();
         }
         
-        // Função para salvar paciente
-        function salvarPaciente() {
-            // Simulação de salvamento
-            const notification = document.getElementById('notification');
-            notification.textContent = "Paciente cadastrado com sucesso!";
-            notification.classList.add('show');
+        // Função para atualizar a tabela de atendimentos
+        function atualizarTabela() {
+            const corpoTabela = document.getElementById('corpoTabela');
+            corpoTabela.innerHTML = '';
             
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
+            // Ordena por data (mais recente primeiro)
+            const atendimentosOrdenados = [...atendimentos].sort((a, b) => new Date(b.data) - new Date(a.data));
             
-            // Limpar formulário
-            document.getElementById('paciente-form').reset();
+            // Mostra apenas os 10 mais recentes na tabela principal
+            const atendimentosParaMostrar = atendimentosOrdenados.slice(0, 10);
+            
+            atendimentosParaMostrar.forEach(atendimento => {
+                const row = document.createElement('tr');
+                if (atendimento.pago) {
+                    row.classList.add('pago');
+                } else {
+                    row.classList.add('nao-pago');
+                }
+                
+                row.innerHTML = `
+                    <td>${formatarData(atendimento.data)}</td>
+                    <td>${atendimento.paciente}</td>
+                    <td>${atendimento.tutor}</td>
+                    <td>R$ ${atendimento.valor.toFixed(2)}</td>
+                    <td>${atendimento.pagamento}</td>
+                    <td><span class="badge ${atendimento.pago ? 'badge-success' : 'badge-danger'}">${atendimento.pago ? 'Sim' : 'Não'}</span></td>
+                    <td><span class="badge ${atendimento.nfEmitida ? 'badge-success' : 'badge-warning'}">${atendimento.nfEmitida ? 'Sim' : 'Não'}</span></td>
+                    <td>
+                        <div class="btn-group">
+                            <button class="btn btn-info btn-sm" onclick="editarAtendimento(${atendimento.id})"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-danger btn-sm" onclick="excluirAtendimento(${atendimento.id})"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </td>
+                `;
+                
+                corpoTabela.appendChild(row);
+            });
         }
         
-        // Função para gerar relatório
-        function gerarRelatorio() {
-            // Simulação de geração de relatório
-            const notification = document.getElementById('notification');
-            notification.textContent = "Relatório gerado com sucesso!";
-            notification.classList.add('show');
+        // Função para atualizar as estatísticas
+        function atualizarEstatisticas() {
+            const hoje = new Date().toISOString().split('T')[0];
             
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
+            let totalRecebido = 0;
+            let aReceber = 0;
+            let nfPendentes = 0;
+            let atendimentosHoje = 0;
+            let faturamentoHoje = 0;
+            
+            atendimentos.forEach(atendimento => {
+                if (atendimento.pago) {
+                    totalRecebido += atendimento.valor;
+                } else {
+                    aReceber += atendimento.valor;
+                }
+                
+                if (!atendimento.nfEmitida) {
+                    nfPendentes++;
+                }
+                
+                if (atendimento.data === hoje) {
+                    atendimentosHoje++;
+                    faturamentoHoje += atendimento.valor;
+                }
+            });
+            
+            // Atualiza os cards de estatísticas
+            document.getElementById('stats-hoje').textContent = atendimentosHoje;
+            document.getElementById('stats-faturamento-hoje').textContent = `R$ ${faturamentoHoje.toFixed(2)}`;
+            document.getElementById('stats-pendentes').textContent = atendimentos.filter(a => !a.pago).length;
+            document.getElementById('stats-nf-pendentes').textContent = nfPendentes;
+        }
+        
+        // Função para formatar a data
+        function formatarData(dataString) {
+            const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+            return new Date(dataString).toLocaleDateString('pt-BR', options);
+        }
+        
+        // Função para limpar o formulário
+        function limparFormulario() {
+            document.getElementById('data').value = new Date().toISOString().split('T')[0];
+            document.getElementById('paciente').value = '';
+            document.getElementById('tutor').value = '';
+            document.getElementById('cpf').value = '';
+            document.getElementById('endereco').value = '';
+            document.getElementById('valor').value = '';
+            document.getElementById('pagamento').value = 'Pix';
+            document.getElementById('pago').checked = false;
+            document.getElementById('nfEmitida').checked = false;
+            document.getElementById('observacoes').value = '';
+        }
+        
+        // Função para editar um atendimento
+        function editarAtendimento(id) {
+            const atendimento = atendimentos.find(a => a.id === id);
+            if (!atendimento) return;
+            
+            document.getElementById('data').value = atendimento.data;
+            document.getElementById('paciente').value = atendimento.paciente;
+            document.getElementById('tutor').value = atendimento.tutor;
+            document.getElementById('cpf').value = atendimento.cpf || '';
+            document.getElementById('endereco').value = atendimento.endereco || '';
+            document.getElementById('valor').value = atendimento.valor;
+            document.getElementById('pagamento').value = atendimento.pagamento;
+            document.getElementById('pago').checked = atendimento.pago;
+            document.getElementById('nfEmitida').checked = atendimento.nfEmitida;
+            document.getElementById('observacoes').value = atendimento.observacoes || '';
+            
+            // Remove o atendimento antigo
+            atendimentos = atendimentos.filter(a => a.id !== id);
+            localStorage.setItem('atendimentos', JSON.stringify(atendimentos));
+            atualizarTabela();
+            atualizarEstatisticas();
+            atualizarListaPacientes();
+            preencherSelectPacientes();
+        }
+        
+        // Função para excluir um atendimento
+        function excluirAtendimento(id) {
+            if (confirm('Tem certeza que deseja excluir este atendimento?')) {
+                atendimentos = atendimentos.filter(a => a.id !== id);
+                localStorage.setItem('atendimentos', JSON.stringify(atendimentos));
+                atualizarTabela();
+                atualizarEstatisticas();
+                atualizarListaPacientes();
+                preencherSelectPacientes();
+            }
+        }
+        
+        // Função para exportar para CSV
+        function exportarParaCSV() {
+    // Usa ponto-e-vírgula como separador (melhor para Excel em português)
+    const separator = ";";
+    
+    let csv = `Data${separator}Paciente${separator}Tutor${separator}CPF${separator}Endereço${separator}Serviço${separator}Valor${separator}Forma Pagamento${separator}Pago${separator}NF Emitida${separator}Observações\n`;
+    
+    atendimentos.forEach(atendimento => {
+        csv += [
+            formatarData(atendimento.data),
+            atendimento.paciente,
+            atendimento.tutor,
+            atendimento.cpf || '',
+            atendimento.endereco || '',
+            atendimento.servico,
+            atendimento.valor,
+            atendimento.pagamento,
+            atendimento.pago ? 'Sim' : 'Não',
+            atendimento.nfEmitida ? 'Sim' : 'Não',
+            atendimento.observacoes || ''
+        ].join(separator) + "\n";
+    });
+    
+    const blob = new Blob(["\uFEFF" + csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `controle_financeiro_${new Date().toISOString().slice(0, 10)}.csv`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+        
+        // Função para abrir um modal
+        function openModal(id) {
+            document.getElementById(id).style.display = 'flex';
+        }
+        
+        // Função para fechar um modal
+        function closeModal(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+        
+        // Função para alternar entre abas
+        function openTab(evt, tabName) {
+            const tabContents = document.getElementsByClassName('tab-content');
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove('active');
+            }
+            
+            const tabs = document.getElementsByClassName('tab');
+            for (let i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove('active');
+            }
+            
+            document.getElementById(tabName).classList.add('active');
+            evt.currentTarget.classList.add('active');
+        }
+        
+        // Função para atualizar a lista de pacientes para autocomplete
+        function atualizarListaPacientes() {
+            const pacientesList = document.getElementById('pacientes-list');
+            pacientesList.innerHTML = '';
+            
+            // Obtém lista única de pacientes
+            const pacientesUnicos = [...new Set(atendimentos.map(a => a.paciente))];
+            
+            pacientesUnicos.forEach(paciente => {
+                const option = document.createElement('option');
+                option.value = paciente;
+                pacientesList.appendChild(option);
+            });
+        }
+        
+        // Função para preencher o select de pacientes para relatórios
+        function preencherSelectPacientes() {
+            const select = document.getElementById('report-paciente');
+            select.innerHTML = '<option value="">Selecione um paciente</option>';
+            
+            // Obtém lista única de pacientes
+            const pacientesUnicos = [...new Set(atendimentos.map(a => a.paciente))];
+            
+            pacientesUnicos.forEach(paciente => {
+                const option = document.createElement('option');
+                option.value = paciente;
+                option.textContent = paciente;
+                select.appendChild(option);
+            });
+        }
+        
+        // Função para gerar relatórios gerais
+        function gerarRelatorio(tipo) {
+            let atendimentosFiltrados = [];
+            let titulo = '';
+            
+            switch(tipo) {
+                case 'pendentes-pagamento':
+                    atendimentosFiltrados = atendimentos.filter(a => !a.pago);
+                    titulo = 'Atendimentos Pendentes de Pagamento';
+                    break;
+                case 'pendentes-nf':
+                    atendimentosFiltrados = atendimentos.filter(a => !a.nfEmitida);
+                    titulo = 'Atendimentos Pendentes de Nota Fiscal';
+                    break;
+                case 'todos':
+                    atendimentosFiltrados = [...atendimentos].sort((a, b) => new Date(b.data) - new Date(a.data));
+                    titulo = 'Todos os Atendimentos';
+                    break;
+            }
+            
+            let html = `<h3>${titulo} (${atendimentosFiltrados.length})</h3>`;
+            
+            if (atendimentosFiltrados.length === 0) {
+                html += '<p>Nenhum atendimento encontrado.</p>';
+            } else {
+                html += `
+                    <div class="table-responsive">
+                        <table class="report-table">
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Paciente</th>
+                                    <th>Tutor</th>
+                                    <th>Valor</th>
+                                    <th>Pagamento</th>
+                                    <th>Pago</th>
+                                    <th>NF</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                `;
+                
+                atendimentosFiltrados.forEach(atendimento => {
+                    html += `
+                        <tr class="${atendimento.pago ? 'pago' : 'nao-pago'}">
+                            <td>${formatarData(atendimento.data)}</td>
+                            <td>${atendimento.paciente}</td>
+                            <td>${atendimento.tutor}</td>
+                            <td>R$ ${atendimento.valor.toFixed(2)}</td>
+                            <td>${atendimento.pagamento}</td>
+                            <td><span class="badge ${atendimento.pago ? 'badge-success' : 'badge-danger'}">${atendimento.pago ? 'Sim' : 'Não'}</span></td>
+                            <td><span class="badge ${atendimento.nfEmitida ? 'badge-success' : 'badge-warning'}">${atendimento.nfEmitida ? 'Sim' : 'Não'}</span></td>
+                            <td>
+                                <button class="btn btn-info btn-sm" onclick="editarAtendimento(${atendimento.id})"><i class="fas fa-edit"></i></button>
+                            </td>
+                        </tr>
+                    `;
+                });
+                
+                html += `
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="btn-group" style="margin-top: 20px;">
+                        <button class="btn btn-success" onclick="exportarRelatorio('${tipo}')"><i class="fas fa-file-export"></i> Exportar Relatório</button>
+                    </div>
+                `;
+            }
+            
+            document.getElementById('report-result-container').innerHTML = html;
+        }
+        
+        // Função para exportar relatório específico
+        function exportarRelatorio(tipo) {
+            let atendimentosFiltrados = [];
+            let nomeArquivo = '';
+            
+            switch(tipo) {
+                case 'pendentes-pagamento':
+                    atendimentosFiltrados = atendimentos.filter(a => !a.pago);
+                    nomeArquivo = 'pendentes_pagamento';
+                    break;
+                case 'pendentes-nf':
+                    atendimentosFiltrados = atendimentos.filter(a => !a.nfEmitida);
+                    nomeArquivo = 'pendentes_nf';
+                    break;
+                case 'todos':
+                    atendimentosFiltrados = [...atendimentos].sort((a, b) => new Date(b.data) - new Date(a.data));
+                    nomeArquivo = 'todos_atendimentos';
+                    break;
+            }
+            
+            let csv = 'Data,Paciente,Tutor,CPF,Endereço,Serviço,Valor,Forma Pagamento,Pago,NF Emitida,Observações\n';
+            
+            atendimentosFiltrados.forEach(atendimento => {
+                csv += `"${formatarData(atendimento.data)}","${atendimento.paciente}","${atendimento.tutor}","${atendimento.cpf || ''}","${atendimento.endereco || ''}","${atendimento.servico}",${atendimento.valor},"${atendimento.pagamento}","${atendimento.pago ? 'Sim' : 'Não'}","${atendimento.nfEmitida ? 'Sim' : 'Não'}","${atendimento.observacoes || ''}"\n`;
+            });
+            
+            const blob = new Blob(["\uFEFF" + csv], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `${nomeArquivo}_${new Date().toISOString().slice(0, 10)}.csv`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+        
+        // Função para atualizar as datas do relatório financeiro
+        function updateReportDates() {
+            const period = document.getElementById('report-period').value;
+            const startCol = document.getElementById('custom-date-start-col');
+            const endCol = document.getElementById('custom-date-end-col');
+            
+            if (period === 'custom') {
+                startCol.style.display = 'block';
+                endCol.style.display = 'block';
+                
+                // Define datas padrão para o período personalizado
+                const hoje = new Date();
+                const umMesAtras = new Date();
+                umMesAtras.setMonth(hoje.getMonth() - 1);
+                
+                document.getElementById('report-date-start').value = umMesAtras.toISOString().split('T')[0];
+                document.getElementById('report-date-end').value = hoje.toISOString().split('T')[0];
+            } else {
+                startCol.style.display = 'none';
+                endCol.style.display = 'none';
+            }
+        }
+        
+        // Função para gerar relatório financeiro
+        function gerarRelatorioFinanceiro() {
+            const period = document.getElementById('report-period').value;
+            let dataInicio, dataFim;
+            
+            const hoje = new Date();
+            hoje.setHours(0, 0, 0, 0);
+            
+            switch(period) {
+                case 'hoje':
+                    dataInicio = new Date(hoje);
+                    dataFim = new Date(hoje);
+                    break;
+                case 'semana':
+                    dataInicio = new Date(hoje);
+                    dataInicio.setDate(hoje.getDate() - hoje.getDay()); // Domingo da semana atual
+                    dataFim = new Date(hoje);
+                    dataFim.setDate(hoje.getDate() + (6 - hoje.getDay())); // Sábado da semana atual
+                    break;
+                case 'mes':
+                    dataInicio = new Date(hoje.getFullYear(), hoje.getMonth(), 1);
+                    dataFim = new Date(hoje.getFullYear(), hoje.getMonth() + 1, 0);
+                    break;
+                case 'ano':
+                    dataInicio = new Date(hoje.getFullYear(), 0, 1);
+                    dataFim = new Date(hoje.getFullYear(), 11, 31);
+                    break;
+                case 'custom':
+                    dataInicio = new Date(document.getElementById('report-date-start').value);
+                    dataFim = new Date(document.getElementById('report-date-end').value);
+                    break;
+            }
+            
+            // Ajusta para incluir todo o dia final
+            dataFim.setHours(23, 59, 59, 999);
+            
+            // Filtra atendimentos no período
+            const atendimentosPeriodo = atendimentos.filter(a => {
+                const dataAtendimento = new Date(a.data);
+                return dataAtendimento >= dataInicio && dataAtendimento <= dataFim;
+            });
+            
+            // Agrupa por data
+            const atendimentosPorData = {};
+            atendimentosPeriodo.forEach(a => {
+                const data = a.data;
+                if (!atendimentosPorData[data]) {
+                    atendimentosPorData[data] = [];
+                }
+                atendimentosPorData[data].push(a);
+            });
+            
+            // Ordena as datas
+            const datasOrdenadas = Object.keys(atendimentosPorData).sort((a, b) => new Date(a) - new Date(b));
+            
+            // Calcula totais
+            let totalAtendimentos = 0;
+            let totalRecebido = 0;
+            let totalAReceber = 0;
+            
+            atendimentosPeriodo.forEach(a => {
+                totalAtendimentos++;
+                if (a.pago) {
+                    totalRecebido += a.valor;
+                } else {
+                    totalAReceber += a.valor;
+                }
+            });
+            
+            let html = `
+                <h3>Relatório Financeiro - ${getPeriodLabel(period, dataInicio, dataFim)}</h3>
+                <div class="stats-row">
+                    <div class="stats-card stats-card-primary">
+                        <div class="stats-card-title">Total Atendimentos</div>
+                        <div class="stats-card-value">${totalAtendimentos}</div>
+                    </div>
+                    <div class="stats-card stats-card-success">
+                        <div class="stats-card-title">Total Recebido</div>
+                        <div class="stats-card-value">R$ ${totalRecebido.toFixed(2)}</div>
+                    </div>
+                    <div class="stats-card stats-card-warning">
+                        <div class="stats-card-title">A Receber</div>
+                        <div class="stats-card-value">R$ ${totalAReceber.toFixed(2)}</div>
+                    </div>
+                </div>
+            `;
+            
+            if (datasOrdenadas.length === 0) {
+                html += '<p>Nenhum atendimento encontrado neste período.</p>';
+            } else {
+                html += `
+                    <h4 style="margin-top: 20px;">Detalhamento por Dia</h4>
+                    <div class="table-responsive">
+                        <table class="report-table">
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Atendimentos</th>
+                                    <th>Faturamento</th>
+                                    <th>Detalhes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                `;
+                
+                datasOrdenadas.forEach(data => {
+                    const atendimentosDia = atendimentosPorData[data];
+                    const faturamentoDia = atendimentosDia.reduce((sum, a) => sum + a.valor, 0);
+                    const qtdAtendimentos = atendimentosDia.length;
+                    
+                    html += `
+                        <tr>
+                            <td>${formatarData(data)}</td>
+                            <td>${qtdAtendimentos}</td>
+                            <td>R$ ${faturamentoDia.toFixed(2)}</td>
+                            <td>
+                                <button class="btn btn-info btn-sm" onclick="mostrarDetalhesDia('${data}')">
+                                    <i class="fas fa-eye"></i> Ver
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                });
+                
+                html += `
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="btn-group" style="margin-top: 20px;">
+                        <button class="btn btn-success" onclick="exportarRelatorioFinanceiro('${period}', '${dataInicio.toISOString().split('T')[0]}', '${dataFim.toISOString().split('T')[0]}')">
+                            <i class="fas fa-file-export"></i> Exportar Relatório
+                        </button>
+                    </div>
+                `;
+            }
+            
+            document.getElementById('finance-report-result-container').innerHTML = html;
+        }
+        
+        // Função para obter o rótulo do período
+        function getPeriodLabel(period, dataInicio, dataFim) {
+            switch(period) {
+                case 'hoje':
+                    return 'Hoje';
+                case 'semana':
+                    return 'Esta Semana';
+                case 'mes':
+                    return 'Este Mês';
+                case 'ano':
+                    return 'Este Ano';
+                case 'custom':
+                    return `Período Personalizado (${formatarData(dataInicio)} a ${formatarData(dataFim)})`;
+                default:
+                    return '';
+            }
+        }
+        
+        // Função para mostrar detalhes de um dia específico
+        function mostrarDetalhesDia(data) {
+            const atendimentosDia = atendimentos.filter(a => a.data === data);
+            
+            let html = `
+                <h4>Atendimentos em ${formatarData(data)}</h4>
+                <div class="table-responsive">
+                    <table class="report-table">
+                        <thead>
+                            <tr>
+                                <th>Paciente</th>
+                                <th>Tutor</th>
+                                <th>Valor</th>
+                                <th>Pagamento</th>
+                                <th>Pago</th>
+                                <th>NF</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+            
+            atendimentosDia.forEach(atendimento => {
+                html += `
+                    <tr class="${atendimento.pago ? 'pago' : 'nao-pago'}">
+                        <td>${atendimento.paciente}</td>
+                        <td>${atendimento.tutor}</td>
+                        <td>R$ ${atendimento.valor.toFixed(2)}</td>
+                        <td>${atendimento.pagamento}</td>
+                        <td><span class="badge ${atendimento.pago ? 'badge-success' : 'badge-danger'}">${atendimento.pago ? 'Sim' : 'Não'}</span></td>
+                        <td><span class="badge ${atendimento.nfEmitida ? 'badge-success' : 'badge-warning'}">${atendimento.nfEmitida ? 'Sim' : 'Não'}</span></td>
+                    </tr>
+                `;
+            });
+            
+            html += `
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            
+            // Abre um modal com os detalhes
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.style.display = 'flex';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title">Detalhes do Dia</h2>
+                        <button class="close-modal" onclick="this.parentElement.parentElement.parentElement.remove()">&times;</button>
+                    </div>
+                    ${html}
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+        }
+        
+        // Função para exportar relatório financeiro
+        function exportarRelatorioFinanceiro(period, dataInicio, dataFim) {
+            let nomeArquivo = `relatorio_financeiro_${period}`;
+            let titulo = getPeriodLabel(period, new Date(dataInicio), new Date(dataFim));
+            
+            if (period === 'custom') {
+                nomeArquivo += `_${dataInicio}_a_${dataFim}`;
+            } else {
+                nomeArquivo += `_${new Date().toISOString().slice(0, 10)}`;
+            }
+            
+            // Filtra atendimentos no período
+            const atendimentosPeriodo = atendimentos.filter(a => {
+                const dataAtendimento = new Date(a.data);
+                const inicio = new Date(dataInicio);
+                const fim = new Date(dataFim);
+                fim.setHours(23, 59, 59, 999);
+                return dataAtendimento >= inicio && dataAtendimento <= fim;
+            });
+            
+            let csv = `Relatório Financeiro - ${titulo}\n\n`;
+            csv += 'Data,Paciente,Tutor,Valor,Forma Pagamento,Pago,NF Emitida\n';
+            
+            atendimentosPeriodo.forEach(atendimento => {
+                csv += `"${formatarData(atendimento.data)}","${atendimento.paciente}","${atendimento.tutor}",${atendimento.valor},"${atendimento.pagamento}","${atendimento.pago ? 'Sim' : 'Não'}","${atendimento.nfEmitida ? 'Sim' : 'Não'}"\n`;
+            });
+            
+            // Adiciona totais
+            const totalRecebido = atendimentosPeriodo.filter(a => a.pago).reduce((sum, a) => sum + a.valor, 0);
+            const totalAReceber = atendimentosPeriodo.filter(a => !a.pago).reduce((sum, a) => sum + a.valor, 0);
+            
+            csv += `\nTotal Atendimentos,${atendimentosPeriodo.length}\n`;
+            csv += `Total Recebido,${totalRecebido.toFixed(2)}\n`;
+            csv += `A Receber,${totalAReceber.toFixed(2)}\n`;
+            
+            const blob = new Blob(["\uFEFF" + csv], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `${nomeArquivo}.csv`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+        
+        // Função para gerar relatório por paciente
+        function gerarRelatorioPaciente() {
+            const paciente = document.getElementById('report-paciente').value;
+            
+            if (!paciente) {
+                alert('Por favor, selecione um paciente.');
+                return;
+            }
+            
+            const atendimentosPaciente = atendimentos.filter(a => a.paciente === paciente)
+                .sort((a, b) => new Date(b.data) - new Date(a.data));
+            
+            let html = `<h3>Atendimentos para ${paciente} (${atendimentosPaciente.length})</h3>`;
+            
+            if (atendimentosPaciente.length === 0) {
+                html += '<p>Nenhum atendimento encontrado para este paciente.</p>';
+            } else {
+                // Calcula totais
+                const tutor = atendimentosPaciente[0].tutor;
+                const cpf = atendimentosPaciente[0].cpf || 'Não informado';
+                const endereco = atendimentosPaciente[0].endereco || 'Não informado';
+                const totalValor = atendimentosPaciente.reduce((sum, a) => sum + a.valor, 0);
+                const totalPago = atendimentosPaciente.filter(a => a.pago).reduce((sum, a) => sum + a.valor, 0);
+                const totalPendente = atendimentosPaciente.filter(a => !a.pago).reduce((sum, a) => sum + a.valor, 0);
+                const nfsPendentes = atendimentosPaciente.filter(a => !a.nfEmitida).length;
+                
+                html += `
+                    <div class="card" style="margin-bottom: 20px;">
+                        <p><strong>Tutor:</strong> ${tutor}</p>
+                        <p><strong>CPF:</strong> ${cpf}</p>
+                        <p><strong>Endereço:</strong> ${endereco}</p>
+                        <p><strong>Total em Atendimentos:</strong> R$ ${totalValor.toFixed(2)}</p>
+                        <p><strong>Total Pago:</strong> R$ ${totalPago.toFixed(2)}</p>
+                        <p><strong>Total Pendente:</strong> R$ ${totalPendente.toFixed(2)}</p>
+                        <p><strong>NFs Pendentes:</strong> ${nfsPendentes}</p>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="report-table">
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Valor</th>
+                                    <th>Pagamento</th>
+                                    <th>Pago</th>
+                                    <th>NF</th>
+                                    <th>Observações</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                `;
+                
+                atendimentosPaciente.forEach(atendimento => {
+                    html += `
+                        <tr class="${atendimento.pago ? 'pago' : 'nao-pago'}">
+                            <td>${formatarData(atendimento.data)}</td>
+                            <td>R$ ${atendimento.valor.toFixed(2)}</td>
+                            <td>${atendimento.pagamento}</td>
+                            <td><span class="badge ${atendimento.pago ? 'badge-success' : 'badge-danger'}">${atendimento.pago ? 'Sim' : 'Não'}</span></td>
+                            <td><span class="badge ${atendimento.nfEmitida ? 'badge-success' : 'badge-warning'}">${atendimento.nfEmitida ? 'Sim' : 'Não'}</span></td>
+                            <td>${atendimento.observacoes || '-'}</td>
+                            <td>
+                                <button class="btn btn-info btn-sm" onclick="editarAtendimento(${atendimento.id})"><i class="fas fa-edit"></i></button>
+                            </td>
+                        </tr>
+                    `;
+                });
+                
+                html += `
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="btn-group" style="margin-top: 20px;">
+                        <button class="btn btn-success" onclick="exportarRelatorioPaciente('${paciente}')">
+                            <i class="fas fa-file-export"></i> Exportar Relatório
+                        </button>
+                    </div>
+                `;
+            }
+            
+            document.getElementById('paciente-report-result-container').innerHTML = html;
+        }
+        
+        // Função para exportar relatório por paciente
+        function exportarRelatorioPaciente(paciente) {
+            const atendimentosPaciente = atendimentos.filter(a => a.paciente === paciente)
+                .sort((a, b) => new Date(b.data) - new Date(a.data));
+            
+            if (atendimentosPaciente.length === 0) return;
+            
+            const tutor = atendimentosPaciente[0].tutor;
+            const cpf = atendimentosPaciente[0].cpf || 'Não informado';
+            const endereco = atendimentosPaciente[0].endereco || 'Não informado';
+            
+            let csv = `Relatório de Atendimentos - ${paciente}\n\n`;
+            csv += `Tutor: ${tutor}\n`;
+            csv += `CPF: ${cpf}\n`;
+            csv += `Endereço: ${endereco}\n\n`;
+            
+            csv += 'Data,Valor,Forma Pagamento,Pago,NF Emitida,Observações\n';
+            
+            atendimentosPaciente.forEach(atendimento => {
+                csv += `"${formatarData(atendimento.data)}",${atendimento.valor},"${atendimento.pagamento}","${atendimento.pago ? 'Sim' : 'Não'}","${atendimento.nfEmitida ? 'Sim' : 'Não'}","${atendimento.observacoes || ''}"\n`;
+            });
+            
+            // Adiciona totais
+            const totalValor = atendimentosPaciente.reduce((sum, a) => sum + a.valor, 0);
+            const totalPago = atendimentosPaciente.filter(a => a.pago).reduce((sum, a) => sum + a.valor, 0);
+            const totalPendente = atendimentosPaciente.filter(a => !a.pago).reduce((sum, a) => sum + a.valor, 0);
+            const nfsPendentes = atendimentosPaciente.filter(a => !a.nfEmitida).length;
+            
+            csv += `\nTotal em Atendimentos,${totalValor.toFixed(2)}\n`;
+            csv += `Total Pago,${totalPago.toFixed(2)}\n`;
+            csv += `Total Pendente,${totalPendente.toFixed(2)}\n`;
+            csv += `NFs Pendentes,${nfsPendentes}\n`;
+            
+            const blob = new Blob(["\uFEFF" + csv], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `relatorio_paciente_${paciente.replace(/ /g, '_')}_${new Date().toISOString().slice(0, 10)}.csv`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
     </script>
 </body>
