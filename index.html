@@ -451,14 +451,14 @@
     <div class="container">
         <div class="stats-row">
             <div class="stats-card stats-card-primary">
-                <div class="stats-card-title">Atendimentos Hoje</div>
+                <div class="stats-card-title">Atendimentos no Mês</div>
                 <div class="stats-card-value" id="stats-hoje">0</div>
-                <div class="stats-card-change"><i class="fas fa-calendar-day"></i> Dia atual</div>
+                <div class="stats-card-change"><i class="fas fa-calendar-day"></i> Mês atual</div>
             </div>
             <div class="stats-card stats-card-success">
-                <div class="stats-card-title">Faturamento Hoje</div>
+                <div class="stats-card-title">Faturamento no Mês</div>
                 <div class="stats-card-value" id="stats-faturamento-hoje">R$ 0,00</div>
-                <div class="stats-card-change"><i class="fas fa-money-bill-wave"></i> Receita do dia</div>
+                <div class="stats-card-change"><i class="fas fa-money-bill-wave"></i> Receita do mês</div>
             </div>
             <div class="stats-card stats-card-warning">
                 <div class="stats-card-title">Pendentes de Pagamento</div>
@@ -692,7 +692,7 @@
         let pacientes = [];
         
         // Inicializa a aplicação
-        window.onload = function() {
+         window.onload = function() {
             // Define a data atual como padrão
             const hoje = new Date().toISOString().split('T')[0];
             document.getElementById('data').value = hoje;
@@ -810,38 +810,42 @@
             let totalRecebido = 0;
             let aReceber = 0;
             let nfPendentes = 0;
-            let atendimentosHoje = 0;
-            let faturamentoHoje = 0;
             
-            atendimentos.forEach(atendimento => {
-                if (atendimento.pago) {
-                    totalRecebido += atendimento.valor;
-                } else {
-                    aReceber += atendimento.valor;
-                }
-                
-                if (!atendimento.nfEmitida) {
-                    nfPendentes++;
-                }
-                
-                if (atendimento.data === hoje) {
-                    atendimentosHoje++;
-                    faturamentoHoje += atendimento.valor;
-                }
-            });
+let atendimentosMes = 0;
+let faturamentoMes = 0;
+
+const mesAtual = hoje.slice(0, 7); // YYYY-MM
+
+atendimentos.forEach(atendimento => {
+    if (atendimento.pago) {
+        totalRecebido += atendimento.valor;
+    } else {
+        aReceber += atendimento.valor;
+    }
+
+    if (!atendimento.nfEmitida) {
+        nfPendentes++;
+    }
+
+    if (atendimento.data.slice(0, 7) === mesAtual) {
+        atendimentosMes++;
+        faturamentoMes += atendimento.valor;
+    }
+});
+
             
             // Atualiza os cards de estatísticas
-            document.getElementById('stats-hoje').textContent = atendimentosHoje;
-            document.getElementById('stats-faturamento-hoje').textContent = `R$ ${faturamentoHoje.toFixed(2)}`;
+            document.getElementById('stats-hoje').textContent = atendimentosMes;
+            document.getElementById('stats-faturamento-hoje').textContent = `R$ ${faturamentoMes.toFixed(2)}`;
             document.getElementById('stats-pendentes').textContent = atendimentos.filter(a => !a.pago).length;
             document.getElementById('stats-nf-pendentes').textContent = nfPendentes;
         }
         
         // Função para formatar a data
         function formatarData(dataString) {
-            const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
-            return new Date(dataString).toLocaleDateString('pt-BR', options);
-        }
+    const [ano, mes, dia] = dataString.split('-');
+    return `${dia}/${mes}/${ano}`;
+}
         
         // Função para limpar o formulário
         function limparFormulario() {
@@ -896,11 +900,9 @@
         
         // Função para exportar para CSV
         function exportarParaCSV() {
-    // Usa ponto-e-vírgula como separador (melhor para Excel em português)
     const separator = ";";
-    
-    let csv = `Data${separator}Paciente${separator}Tutor${separator}CPF${separator}Endereço${separator}Serviço${separator}Valor${separator}Forma Pagamento${separator}Pago${separator}NF Emitida${separator}Observações\n`;
-    
+    let csv = `Data${separator}Paciente${separator}Tutor${separator}CPF${separator}Endereço${separator}Serviço${separator}Valor${separator}Forma Pagamento${separator}Pago${separator}NF Emitida${separator}Observações\r\n`;
+
     atendimentos.forEach(atendimento => {
         csv += [
             formatarData(atendimento.data),
@@ -914,9 +916,9 @@
             atendimento.pago ? 'Sim' : 'Não',
             atendimento.nfEmitida ? 'Sim' : 'Não',
             atendimento.observacoes || ''
-        ].join(separator) + "\n";
+        ].join(separator) + "\r\n";
     });
-    
+
     const blob = new Blob(["\uFEFF" + csv], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
@@ -1153,10 +1155,12 @@
             dataFim.setHours(23, 59, 59, 999);
             
             // Filtra atendimentos no período
-            const atendimentosPeriodo = atendimentos.filter(a => {
-                const dataAtendimento = new Date(a.data);
-                return dataAtendimento >= dataInicio && dataAtendimento <= dataFim;
-            });
+            
+    const dataInicioStr = dataInicio.toISOString().split('T')[0];
+    const dataFimStr = dataFim.toISOString().split('T')[0];
+    const atendimentosPeriodo = atendimentos.filter(a => {
+        return a.data >= dataInicioStr && a.data <= dataFimStr;
+    });
             
             // Agrupa por data
             const atendimentosPorData = {};
